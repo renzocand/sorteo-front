@@ -1,4 +1,4 @@
-<div class="container mt-3 mb-5">
+<div class="container  mt-3 mb-5">
     <div class="row">
         <div class="col-12">
             <p-table #dt1 [value]="clientes" dataKey="id" [globalFilterFields]="['nroRifa', 'nombre', 'ciudad']" [loading]="loading">
@@ -8,10 +8,12 @@
 
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="nroRifa">Nro Rifa <p-sortIcon field="nroRifa"></p-sortIcon></th>
+                        <th pSortableColumn="nroRifa">Nro<p-sortIcon field="nroRifa"></p-sortIcon></th>
                         <th pSortableColumn="nombre">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
-                        <th pSortableColumn="ciudad">Ciudad<p-sortIcon field="ciudad"></p-sortIcon></th>
-                        <th pSortableColumn="fechaCreada">Fecha Registro<p-sortIcon field="fechaCreada"></p-sortIcon></th>
+                        <th pSortableColumn="departamento">Dep.<p-sortIcon field="departamento"></p-sortIcon></th>
+                        <th pSortableColumn="provincia">Provincia<p-sortIcon field="provincia"></p-sortIcon></th>
+                        <th pSortableColumn="distrito">Distrito<p-sortIcon field="departadistritomento"></p-sortIcon></th>
+                        <th pSortableColumn="fechaCreada">Registro<p-sortIcon field="fechaCreada"></p-sortIcon></th>
                         <th>
                             <p-columnFilter type="boolean" field="pagado"></p-columnFilter>
                         </th>
@@ -22,7 +24,9 @@
                     <tr>
                         <td>{{car.nroRifa}}</td>
                         <td>{{car.nombre}}</td>
-                        <td>{{car.ciudad}}</td>
+                        <td>{{car.departamento}}</td>
+                        <td>{{car.provincia}}</td>
+                        <td>{{car.distrito}}</td>
                         <td>{{car.fechaCreada}}</td>
                         <td class="p-text-center">
                             <i class="pi" [ngClass]="{'true-icon pi-check-circle': car.pagado, 'false-icon pi-times-circle': !car.pagado}"></i>
