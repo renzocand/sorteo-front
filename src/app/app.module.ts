@@ -13,6 +13,8 @@ import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {SidebarModule} from 'primeng/sidebar';
+import {MessageModule} from 'primeng/message';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     ButtonModule,
     DialogModule,
     BrowserAnimationsModule,
-    SelectButtonModule
+    SelectButtonModule,
+    SidebarModule,
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

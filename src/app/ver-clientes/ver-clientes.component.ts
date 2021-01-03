@@ -4,6 +4,7 @@ import { VerClientesService } from './ver-clientes.service';
 
 import * as dayjs from 'dayjs'
 import { ActivatedRoute } from '@angular/router';
+import { Message } from 'primeng/api/message';
 dayjs().format()
 
 
@@ -23,6 +24,13 @@ export class VerClientesComponent implements OnInit {
   clienteEscogido:ClientesDto;
 
   stateOptions: any[];
+
+  visibleSidebar3 = false;
+
+  clienteGanador:ClientesDto[] = [];
+
+  loadingSorteo = true;
+  msgs1: Message[];
 
 
   constructor(private service:VerClientesService, private ar:ActivatedRoute) { }
@@ -45,6 +53,24 @@ export class VerClientesComponent implements OnInit {
 
   }
 
+  sortear(){
+    this.loadingSorteo = true;
+    this.visibleSidebar3 = true;
+
+    const clientesValidos = this.clientes.filter(item=>item.pagado);
+
+    this.clienteGanador = [ clientesValidos[Math.floor(Math.random() * clientesValidos.length)] ];
+
+    const mensajeGanador = `${this.clienteGanador[0].nombre} con nro de rifa ${this.clienteGanador[0].nroRifa}`
+
+    this.msgs1 = [
+      {severity:'success', summary:'Ganador', detail:mensajeGanador},
+  ];
+
+    setTimeout(() => {
+      this.loadingSorteo = false;
+    }, 1500);
+  }
 
   abrirModal(cliente:ClientesDto){
     this.displayBasic = true;

@@ -23,7 +23,6 @@ export class RegistroClientesComponent implements OnInit {
   distrito:any = [];
 
 
-
   constructor(private service:RegistroClientesService, private router:Router) { }
 
   ngOnInit(): void {
