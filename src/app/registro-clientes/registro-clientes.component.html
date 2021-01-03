@@ -4,7 +4,10 @@
 
       <div class="card">
         <div class="card-header">
-          Rifa de Sonia
+          <div class="row justify-content-between">
+            <h5>{{'Rifa de ' + appService.configuracion.nombreUsuario}}</h5>
+            <span>{{ 'S/' + appService.configuracion.precioRifa * cliente.cntRifas}}</span>
+          </div>
         </div>
         <div class="card-body">
           <form>

@@ -3,6 +3,7 @@ import { Cliente, RegistroClientesRq } from './registro-clientes.models';
 import Swal from 'sweetalert2'
 import { RegistroClientesService } from './registro-clientes.service';
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-registro-clientes',
@@ -23,7 +24,7 @@ export class RegistroClientesComponent implements OnInit {
   distrito:any = [];
 
 
-  constructor(private service:RegistroClientesService, private router:Router) { }
+  constructor(private service:RegistroClientesService, private router:Router, public appService:AppService) { }
 
   ngOnInit(): void {
     this.service.getDepartamentos().subscribe(data=>{
@@ -81,9 +82,9 @@ export class RegistroClientesComponent implements OnInit {
       this.cliente.nombre,
       Number(this.cliente.dni),
       this.cliente.cntRifas,
-      this.cliente.departamento['nombre_ubigeo'],
-      this.cliente.provincia['nombre_ubigeo'],
-      this.cliente.distrito['nombre_ubigeo']
+      this.cliente.departamento?this.cliente.departamento['nombre_ubigeo']:'',
+      this.cliente.provincia?this.cliente.provincia['nombre_ubigeo']:'',
+      this.cliente.distrito?this.cliente.distrito['nombre_ubigeo']:''
     )
 
     this.service.saveCliente(body).subscribe(resp=>{

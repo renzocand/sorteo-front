@@ -5,6 +5,8 @@ import { VerClientesService } from './ver-clientes.service';
 import * as dayjs from 'dayjs'
 import { ActivatedRoute } from '@angular/router';
 import { Message } from 'primeng/api/message';
+import { AppService } from '../app.service';
+import { retryWhen } from 'rxjs/operators';
 dayjs().format()
 
 
@@ -33,15 +35,23 @@ export class VerClientesComponent implements OnInit {
   msgs1: Message[];
 
 
-  constructor(private service:VerClientesService, private ar:ActivatedRoute) { }
+
+
+  constructor(private service:VerClientesService, private ar:ActivatedRoute, private appService:AppService) { }
 
   ngOnInit(): void {
 
-    this.ar.params.subscribe(param=>{
-      if(param['codigo'] == 76586942){
-        this.isAdmin = true;
+    this.appService.isConfiguracion.asObservable().subscribe(data=>{
+      if(data==1){
+        this.ar.params.subscribe(param=>{
+          if(param['codigo'] == this.appService.configuracion.password){
+            this.isAdmin = true;
+          }
+        })
       }
     })
+
+
 
     this.service.getClientes().subscribe(data=>{
       this.clientes = data.map(item=> ({...item,fechaCreada: dayjs(item.fechaCreada).format('DD/MM/YYYY - hh:mm a') }))
