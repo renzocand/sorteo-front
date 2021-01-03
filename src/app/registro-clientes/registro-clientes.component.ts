@@ -64,18 +64,11 @@ export class RegistroClientesComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'El nombre y el DNI son obligatorios',
+        text: 'El nombre y el celular son obligatorios',
       })
       return ;
     }
-    if( this.cliente.dni.length < 7){
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'El DNI debe tener 7 números como mínimo',
-      })
-      return ;
-    }
+
     this.loading = true;
 
     const body = new RegistroClientesRq(

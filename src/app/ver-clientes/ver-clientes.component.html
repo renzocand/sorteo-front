@@ -11,7 +11,7 @@
                     <tr>
                         <th>Nro</th>
                         <th>Nombre</th>
-                        <th>DNI</th>
+                        <th>Celular</th>
                         <th>Provincia</th>
                         <th>Distrito</th>
                     </tr>
@@ -71,7 +71,7 @@
                     <tr>
                         <th pSortableColumn="nroRifa">Nro<p-sortIcon field="nroRifa"></p-sortIcon></th>
                         <th pSortableColumn="nombre">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
-                        <th *ngIf="isAdmin" pSortableColumn="dni">DNI<p-sortIcon field="dni"></p-sortIcon></th>
+                        <th *ngIf="isAdmin" pSortableColumn="dni">Celular<p-sortIcon field="dni"></p-sortIcon></th>
                         <th pSortableColumn="provincia">Provincia<p-sortIcon field="provincia"></p-sortIcon></th>
                         <th pSortableColumn="distrito">Distrito<p-sortIcon field="departadistritomento"></p-sortIcon></th>
                         <!-- <th pSortableColumn="fechaCreada">Registro<p-sortIcon field="fechaCreada"></p-sortIcon></th> -->
@@ -86,7 +86,7 @@
                     <tr>
                         <td>{{car.nroRifa}}</td>
                         <td>{{car.nombre}}</td>
-                        <td *ngIf="isAdmin">{{car.dni}}</td>
+                        <td *ngIf="isAdmin">{{car.dni | mask: '000-000-000'}}</td>
                         <td>{{car.provincia}}</td>
                         <td>{{car.distrito}}</td>
                         <!-- <td>{{car.fechaCreada}}</td> -->
