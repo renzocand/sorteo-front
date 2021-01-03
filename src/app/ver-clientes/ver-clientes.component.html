@@ -1,0 +1,36 @@
+<div class="container mt-3 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <p-table #dt1 [value]="clientes" dataKey="id" [globalFilterFields]="['nroRifa', 'nombre', 'ciudad']">
+                <ng-template pTemplate="caption">
+                    <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar" />
+                </ng-template>
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="nroRifa">Nro Rifa <p-sortIcon field="nroRifa"></p-sortIcon></th>
+                        <th pSortableColumn="nombre">Nombre<p-sortIcon field="nombre"></p-sortIcon></th>
+                        <th pSortableColumn="ciudad">Ciudad<p-sortIcon field="ciudad"></p-sortIcon></th>
+                        <th pSortableColumn="fechaCreada">Fecha Registro<p-sortIcon field="fechaCreada"></p-sortIcon></th>
+                        <th>
+                            <p-columnFilter type="boolean" field="pagado"></p-columnFilter>
+                        </th>
+                    
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-car>
+                    <tr>
+                        <td>{{car.nroRifa}}</td>
+                        <td>{{car.nombre}}</td>
+                        <td>{{car.ciudad}}</td>
+                        <td>{{car.fechaCreada}}</td>
+                        <td class="p-text-center">
+                            <i class="pi" [ngClass]="{'true-icon pi-check-circle': car.pagado, 'false-icon pi-times-circle': !car.pagado}"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>            
+        </div>
+    </div>
+</div>
+
