@@ -1,7 +1,7 @@
 <div class="container mt-3 mb-5">
     <div class="row">
         <div class="col-12">
-            <p-table #dt1 [value]="clientes" dataKey="id" [globalFilterFields]="['nroRifa', 'nombre', 'ciudad']">
+            <p-table #dt1 [value]="clientes" dataKey="id" [globalFilterFields]="['nroRifa', 'nombre', 'ciudad']" [loading]="loading">
                 <ng-template pTemplate="caption">
                     <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar" />
                 </ng-template>

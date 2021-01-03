@@ -13,13 +13,15 @@ dayjs().format()
 })
 export class VerClientesComponent implements OnInit {
 
-  clientes:ClientesDto[] = []
+  clientes:ClientesDto[] = [];
+  loading = true;
 
   constructor(private service:VerClientesService) { }
 
   ngOnInit(): void {
     this.service.getClientes().subscribe(data=>{
       this.clientes = data.map(item=> ({...item,fechaCreada: dayjs(item.fechaCreada).format('DD/MM/YYYY - hh:mm a') }))
+      this.loading = false;
     })
   }
 

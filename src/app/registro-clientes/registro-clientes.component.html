@@ -28,8 +28,16 @@
                 </div>
               </div>
        
-              <button type="button" (click)="save()" class="btn btn-primary">Registrar Rifa</button>
+              <button [disabled]="loading" type="button" (click)="save()" class="btn btn-primary">Registrar Rifa</button>
+
             </form>
+
+            <div class="row justify-center" *ngIf="loading">
+              <div class="spinner-border mt-2 " role="status">
+                <span class="sr-only">Cargando...</span>
+              </div>
+            </div>
+         
         
           </div>
         </div>

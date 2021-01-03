@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class RegistroClientesComponent implements OnInit {
 
-  cliente = new Cliente()
+  cliente = new Cliente();
+  loading = false;
 
   constructor(private service:RegistroClientesService, private router:Router) { }
 
@@ -36,6 +37,8 @@ export class RegistroClientesComponent implements OnInit {
       })
       return ;
     }
+    this.loading = true;
+
     const body = new RegistroClientesRq(
       this.cliente.nombre,
       Number(this.cliente.dni),
@@ -44,6 +47,7 @@ export class RegistroClientesComponent implements OnInit {
     )
 
     this.service.saveCliente(body).subscribe(resp=>{
+      this.loading = false;
       if(resp['ok']){
         Swal.fire({
           icon: 'success',
