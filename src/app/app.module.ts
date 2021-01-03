@@ -9,6 +9,10 @@ import { VerClientesComponent } from './ver-clientes/ver-clientes.component';
 import { AppRoutingModule } from './app.routes';
 import {TableModule} from 'primeng/table';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 @NgModule({
@@ -24,7 +28,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     HttpClientModule,
     TableModule,
-    NgSelectModule
+    NgSelectModule,
+    ButtonModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    SelectButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

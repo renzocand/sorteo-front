@@ -6,7 +6,7 @@ import { VerClientesComponent } from './ver-clientes/ver-clientes.component';
 const routes: Routes = [
     { path: '', component: RegistroClientesComponent },
     { path: 'ver', component: VerClientesComponent },
-    { path: 'ver/76586942', component: VerClientesComponent },
+    { path: 'ver/:codigo', component: VerClientesComponent },
     { path: '**', component: RegistroClientesComponent },
 ];
 

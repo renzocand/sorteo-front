@@ -18,4 +18,9 @@ export class VerClientesService {
             map<any,ClientesDto[]>(item=>item['usuarios'])
         )
     }
+
+    editarCliente(_id:string, pagado:any){
+        const url = this.url + '/cliente/' + _id
+        return this.http.put(url, {pagado})
+    }
 }
