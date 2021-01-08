@@ -77,7 +77,8 @@ export class RegistroClientesComponent implements OnInit {
       this.cliente.cntRifas,
       this.cliente.departamento?this.cliente.departamento['nombre_ubigeo']:'',
       this.cliente.provincia?this.cliente.provincia['nombre_ubigeo']:'',
-      this.cliente.distrito?this.cliente.distrito['nombre_ubigeo']:''
+      this.cliente.distrito?this.cliente.distrito['nombre_ubigeo']:'',
+      this.cliente.referente || ''
     )
 
     this.service.saveCliente(body).subscribe(resp=>{

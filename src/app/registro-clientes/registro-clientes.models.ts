@@ -5,7 +5,8 @@ export class Cliente{
         public cntRifas:number = 1,
         public departamento:string = null,
         public provincia:string = null,
-        public distrito:string = null
+        public distrito:string = null,
+        public referente:string = null,
     ){}
 }
 export class RegistroClientesRq{
@@ -15,6 +16,7 @@ export class RegistroClientesRq{
         public cntRifas:number,
         public departamento:string,
         public provincia:string,
-        public distrito:string
+        public distrito:string,
+        public referente:string,
     ){}
 }

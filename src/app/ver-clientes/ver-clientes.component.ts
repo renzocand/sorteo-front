@@ -6,7 +6,8 @@ import * as dayjs from 'dayjs'
 import { ActivatedRoute } from '@angular/router';
 import { Message } from 'primeng/api/message';
 import { AppService } from '../app.service';
-import { retryWhen } from 'rxjs/operators';
+import Swal from 'sweetalert2'
+import { swalPreguntar } from '../utils/function-utils';
 dayjs().format()
 
 
@@ -67,9 +68,16 @@ export class VerClientesComponent implements OnInit {
     this.loadingSorteo = true;
     this.visibleSidebar3 = true;
 
-    const clientesValidos = this.clientes.filter(item=>item.pagado);
+    const clientesValidos = this.clientes.filter(item=>item.pagado && item.activo);
+
+    if(clientesValidos.length == 0){
+      this.loadingSorteo = false;
+      return ;
+    }
+
 
     this.clienteGanador = [ clientesValidos[Math.floor(Math.random() * clientesValidos.length)] ];
+
 
     const mensajeGanador = `${this.clienteGanador[0].nombre} con nro de rifa ${this.clienteGanador[0].nroRifa}`
 
@@ -100,5 +108,27 @@ export class VerClientesComponent implements OnInit {
         })
       }
     })
+  }
+
+
+  eliminarCliente(cliente:ClientesDto){
+    swalPreguntar('Eliminar la rifa NRO ' + cliente.nroRifa, '').then(() => {
+      send()
+    });
+
+    const send = ()=>{
+
+      this.service.eliminarCliente(cliente._id).subscribe(resp=>{
+        if(resp){
+          this.loading = true;
+          this.service.getClientes().subscribe(data=>{
+            this.clientes = data.map(item=> ({...item,fechaCreada: dayjs(item.fechaCreada).format('DD/MM/YYYY - hh:mm a') }))
+            this.loading = false;
+          })
+        }
+
+      })
+
+    }
   }
 }

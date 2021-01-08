@@ -23,4 +23,9 @@ export class VerClientesService {
         const url = this.url + '/cliente/' + _id
         return this.http.put(url, {pagado})
     }
+
+    eliminarCliente(_id:string){
+        const url = this.url + '/cliente/' + _id
+        return this.http.delete(url)
+    }
 }
