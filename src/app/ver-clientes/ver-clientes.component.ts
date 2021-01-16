@@ -18,34 +18,37 @@ dayjs().format()
 })
 export class VerClientesComponent implements OnInit {
 
-  clientes:ClientesDto[] = [];
+  clientes: ClientesDto[] = [];
   loading = true;
 
   isAdmin = false;
   displayBasic = false;
 
-  clienteEscogido:ClientesDto;
+  clienteEscogido: ClientesDto;
 
   stateOptions: any[];
 
   visibleSidebar3 = false;
 
-  clienteGanador:ClientesDto[] = [];
+  clienteGanador: ClientesDto[] = [];
 
   loadingSorteo = true;
   msgs1: Message[];
 
 
+  numeroRifasCompradas = 0;
 
 
-  constructor(private service:VerClientesService, private ar:ActivatedRoute, private appService:AppService) { }
+
+
+  constructor(private service: VerClientesService, private ar: ActivatedRoute, private appService: AppService) { }
 
   ngOnInit(): void {
 
-    this.appService.isConfiguracion.asObservable().subscribe(data=>{
-      if(data==1){
-        this.ar.params.subscribe(param=>{
-          if(param['codigo'] == this.appService.configuracion.password){
+    this.appService.isConfiguracion.asObservable().subscribe(data => {
+      if (data == 1) {
+        this.ar.params.subscribe(param => {
+          if (param['codigo'] == this.appService.configuracion.password) {
             this.isAdmin = true;
           }
         })
@@ -54,54 +57,76 @@ export class VerClientesComponent implements OnInit {
 
 
 
-    this.service.getClientes().subscribe(data=>{
-      this.clientes = data.map(item=> ({...item,fechaCreada: dayjs(item.fechaCreada).format('DD/MM/YYYY - hh:mm a') }))
+    this.service.getClientes().subscribe(data => {
+      this.clientes = data.map(item => ({ ...item, fechaCreada: dayjs(item.fechaCreada).format('DD/MM/YYYY - hh:mm a') }))
+      this.numeroRifasCompradas =  this.clientes.filter(item => item.pagado).length;
       this.loading = false;
     })
 
 
-    this.stateOptions = [{label: 'Pagada', value: true}, {label: 'Faltante', value: false}];
+    this.stateOptions = [{ label: 'Pagada', value: true }, { label: 'Faltante', value: false }];
 
   }
 
-  sortear(){
+
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.clientes);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "products");
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    import("file-saver").then(FileSaver => {
+      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+      let EXCEL_EXTENSION = '.xlsx';
+      const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+      });
+      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    });
+  }
+
+  sortear() {
     this.loadingSorteo = true;
     this.visibleSidebar3 = true;
 
-    const clientesValidos = this.clientes.filter(item=>item.pagado && item.activo);
+    const clientesValidos = this.clientes.filter(item => item.pagado && item.activo);
 
-    if(clientesValidos.length == 0){
+    if (clientesValidos.length == 0) {
       this.loadingSorteo = false;
-      return ;
+      return;
     }
 
 
-    this.clienteGanador = [ clientesValidos[Math.floor(Math.random() * clientesValidos.length)] ];
+    this.clienteGanador = [clientesValidos[Math.floor(Math.random() * clientesValidos.length)]];
 
 
     const mensajeGanador = `${this.clienteGanador[0].nombre} con nro de rifa ${this.clienteGanador[0].nroRifa}`
 
     this.msgs1 = [
-      {severity:'success', summary:'Ganador', detail:mensajeGanador},
-  ];
+      { severity: 'success', summary: 'Ganador', detail: mensajeGanador },
+    ];
 
     setTimeout(() => {
       this.loadingSorteo = false;
     }, 1500);
   }
 
-  abrirModal(cliente:ClientesDto){
+  abrirModal(cliente: ClientesDto) {
     this.displayBasic = true;
     this.clienteEscogido = JSON.parse(JSON.stringify(cliente))
   }
 
-  editarCliente(cliente:ClientesDto){
-    this.displayBasic=false;
+  editarCliente(cliente: ClientesDto) {
+    this.displayBasic = false;
 
-    this.service.editarCliente(cliente._id,cliente.pagado).subscribe(data=>{
-      if(data['ok']){
-        this.clientes = this.clientes.map(item=>{
-          if(item._id == data['cliente']._id ){
+    this.service.editarCliente(cliente._id, cliente.pagado).subscribe(data => {
+      if (data['ok']) {
+        this.clientes = this.clientes.map(item => {
+          if (item._id == data['cliente']._id) {
             item.pagado = data['cliente']['pagado']
           }
           return item
@@ -111,18 +136,18 @@ export class VerClientesComponent implements OnInit {
   }
 
 
-  eliminarCliente(cliente:ClientesDto){
+  eliminarCliente(cliente: ClientesDto) {
     swalPreguntar('Eliminar la rifa NRO ' + cliente.nroRifa, '').then(() => {
       send()
     });
 
-    const send = ()=>{
+    const send = () => {
 
-      this.service.eliminarCliente(cliente._id).subscribe(resp=>{
-        if(resp){
+      this.service.eliminarCliente(cliente._id).subscribe(resp => {
+        if (resp) {
           this.loading = true;
-          this.service.getClientes().subscribe(data=>{
-            this.clientes = data.map(item=> ({...item,fechaCreada: dayjs(item.fechaCreada).format('DD/MM/YYYY - hh:mm a') }))
+          this.service.getClientes().subscribe(data => {
+            this.clientes = data.map(item => ({ ...item, fechaCreada: dayjs(item.fechaCreada).format('DD/MM/YYYY - hh:mm a') }))
             this.loading = false;
           })
         }

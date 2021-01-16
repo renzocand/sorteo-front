@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "tests": "ng serve -c test",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,6 +23,7 @@
     "@angular/router": "~10.0.9",
     "@ng-select/ng-select": "^5.0.14",
     "dayjs": "^1.9.8",
+    "file-saver": "^2.0.5",
     "ngx-mask": "^11.1.4",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
@@ -29,6 +31,7 @@
     "rxjs": "~6.5.5",
     "sweetalert2": "^10.12.7",
     "tslib": "^2.0.0",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {

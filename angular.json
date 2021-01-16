@@ -31,7 +31,7 @@
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/themes/md-light-indigo/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"  ,
+              "node_modules/primeng/resources/primeng.min.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css"
             ],
             "scripts": []
@@ -64,6 +64,14 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/enviroment.test.ts"
+                }
+              ]
             }
           }
         },
@@ -75,6 +83,9 @@
           "configurations": {
             "production": {
               "browserTarget": "SORTEO:build:production"
+            },
+            "test": {
+              "browserTarget": "SORTEO:build:test"
             }
           }
         },
@@ -107,7 +118,8 @@
               "./node_modules/primeflex/src/_text.scss",
               "./node_modules/primeflex/src/flexbox/_flexbox.scss",
               "./node_modules/primeflex/src/_spacing.scss",
-              "./node_modules/primeflex/src/_elevation.scss"            ],
+              "./node_modules/primeflex/src/_elevation.scss"
+            ],
             "scripts": []
           }
         },
@@ -137,6 +149,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SORTEO"
+    }
+  },
+  "defaultProject": "SORTEO",
+  "cli": {
+    "analytics": "aca9a65e-79cd-470d-b27b-e8b72de76460"
+  }
 }

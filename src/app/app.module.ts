@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {SidebarModule} from 'primeng/sidebar';
 import {MessageModule} from 'primeng/message';
+import {BadgeModule} from 'primeng/badge';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MessageModule} from 'primeng/message';
     BrowserAnimationsModule,
     SelectButtonModule,
     SidebarModule,
-    MessageModule
+    MessageModule,
+    BadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
