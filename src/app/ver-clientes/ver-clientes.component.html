@@ -12,8 +12,8 @@
                             <th>Nro</th>
                             <th>Nombre</th>
                             <th>Celular</th>
-                            <th>Provincia</th>
-                            <th>Distrito</th>
+                            <th>Banco</th>
+                            <th>N° operación</th>
                             <th>Referente</th>
                         </tr>
                     </ng-template>
@@ -91,9 +91,9 @@
                         <th *ngIf="isAdmin" pSortableColumn="referente">Referente<p-sortIcon field="referente">
                             </p-sortIcon>
                         </th>
-                        <th pSortableColumn="provincia">Provincia<p-sortIcon field="provincia"></p-sortIcon>
+                        <th pSortableColumn="provincia">Banco<p-sortIcon field="provincia"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="distrito">Distrito<p-sortIcon field="departadistritomento"></p-sortIcon>
+                        <th pSortableColumn="distrito">N° operación <p-sortIcon field="departadistritomento"></p-sortIcon>
                         </th>
                         <!-- <th pSortableColumn="fechaCreada">Registro<p-sortIcon field="fechaCreada"></p-sortIcon></th> -->
                         <th>
