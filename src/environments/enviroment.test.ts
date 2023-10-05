@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    url: "https://sorteo-peru.herokuapp.com"
+    url: "https://sorteoexpress.fly.dev"
 };
